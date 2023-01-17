@@ -1,0 +1,75 @@
+.admin_dash {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin_dash h1 {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+    align-self: center;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 4%;    
+}
+
+.table td, .table th {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.table .entry:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+
+.table > .details {
+    text-align: center;
+    background-color: blue;
+}
+
+td > img {
+    width: 100px;
+    height: 100px;
+}
+
+Modal {
+    overflow: scroll;
+}
+
+.add_pet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
