@@ -93,6 +93,16 @@ function App() {
                                     </PrivateAdminRoute>
                                 }
                             />
+                            <Route
+                                path="*"
+                                element={
+                                    <div className="not-found">
+                                        <h1>404</h1>
+                                        <h2>Page Not Found</h2>
+                                    </div>
+                                }
+                            />
+                            
                         </Routes>
                         {!user && (
                             <>
