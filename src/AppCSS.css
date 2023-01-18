@@ -21,6 +21,9 @@ body {
 .container {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    min-height: 100vh;
+    background: linear-gradient(#f3f3f3, #d3f0fb);
 }
 
 button {
@@ -251,6 +254,7 @@ button[disabled] {
     justify-content: center;
     align-items: center;
     margin-bottom: 3rem;
+    margin: 2rem auto;
 }
 
 .advancedSearch {
@@ -274,43 +278,6 @@ button[disabled] {
     padding: 0.5rem;
     border-radius: 5px;
     border: 1px solid black;
-}
-
-.sliderContainer {
-    width: 100%;
-}
-
-.slider:hover {
-    opacity: 1;
-}
-
-.slider {
-    appearance: none;
-    width: 80%;
-    height: 15px;
-    background: grey;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    border-radius: 10px;
-}
-
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #04aa6d;
-    cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #04aa6d;
-    cursor: pointer;
 }
 
 .advancedSearchButton {
