@@ -16,6 +16,7 @@ const UserForm = ({ type }) => {
     const [editInfo, setEditInfo] = useState({
         ...user,
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     const [changePass, setChangePass] = useState({
         oldPass: "",
@@ -32,6 +33,7 @@ const UserForm = ({ type }) => {
             // for (let key in editInfo) {
             //     formData.append(key, editInfo[key]);
             // }
+            setIsLoading(true);
             editFormValidation(editInfo);
             setError(valErrorMessage);
 
@@ -40,6 +42,7 @@ const UserForm = ({ type }) => {
                 dispatch({ type: "UPDATE_USER", payload: editInfo });
                 setRender(!render);
             }
+            setIsLoading(false);
         } catch (error) {
             console.log("setting error: ", error);
             setError("Error saving: " + error.response.data);
@@ -49,16 +52,18 @@ const UserForm = ({ type }) => {
     const uploadPhoto = async (e) => {
         e.preventDefault();
         try {
+            setIsLoading(true);
             const formData = new FormData();
             for (let key in editInfo) {
                 formData.append(key, editInfo[key]);
             }
-            await axios.put(                    
+            await axios.put(
                 `${process.env.REACT_APP_SERVER_URL}/users/uploadPhoto`,
                 formData,
                 { withCredentials: true }
             );
             setRender(!render);
+            setIsLoading(false);
         } catch (error) {
             console.log("setting error: ", error);
             setError("Error saving: " + error.response);
@@ -92,6 +97,7 @@ const UserForm = ({ type }) => {
 
         if (changePass.newPass === changePass.confirmPass) {
             try {
+                setIsLoading(true);
                 user.password = changePass.oldPass;
                 user.newPass = changePass.newPass;
                 await axios.put(
@@ -102,6 +108,7 @@ const UserForm = ({ type }) => {
                 resetFields();
                 setError("");
                 setShow(false);
+                setIsLoading(false);
             } catch (error) {
                 console.log("setting error: ", error);
                 setError("Error changing password: " + error.response.data);
@@ -188,7 +195,7 @@ const UserForm = ({ type }) => {
                         value={editInfo.bio}
                     ></textarea>
 
-                    <button type="submit" disabled={disabled}>
+                    <button type="submit" disabled={disabled || isLoading}>
                         Save Changes
                     </button>
                 </form>
@@ -203,7 +210,11 @@ const UserForm = ({ type }) => {
                             id="picture"
                             onChange={handleInputChange}
                         />
-                        <button type="submit" onClick={uploadPhoto}>
+                        <button
+                            type="submit"
+                            onClick={uploadPhoto}
+                            disabled={isLoading}
+                        >
                             Upload Photo
                         </button>
                     </form>
@@ -243,7 +254,7 @@ const UserForm = ({ type }) => {
                             />
                             <button
                                 type="submit"
-                                disabled={passChangeDisabled}
+                                disabled={passChangeDisabled || isLoading}
                                 onClick={handlePassSubmit}
                             >
                                 Change Password
