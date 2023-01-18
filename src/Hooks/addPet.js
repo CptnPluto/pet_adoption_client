@@ -9,8 +9,8 @@ const addPet = () => {
             authorization: `Bearer ${token}`,
         }
     }
-    const addPet = () => {
-            const res = await axios.post("http://localhost:8080/pets", newPet, {headers: {authorization: `Bearer ${token}`}})
+    const addPet = async () => {
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/pets`, newPet, {headers: {authorization: `Bearer ${token}`}})
     }
 
     return 

@@ -11,7 +11,7 @@ const useSignup = () => {
     const signup = async (signupInfo) => {
         try {
             const res = await axios.post(
-                "http://localhost:8080/users/signup",
+                `${process.env.REACT_APP_SERVER_URL}/users/signup`,
                 signupInfo
             );
             console.log("Res:", res.data);

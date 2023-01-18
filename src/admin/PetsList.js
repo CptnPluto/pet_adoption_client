@@ -15,7 +15,7 @@ const UsersList = () => {
 
     const fetchPets = async () => {
         try {
-            const res = await axios.get("http://localhost:8080/pets", {
+            const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pets`, {
                 withCredentials: true,
             });
             setPets(res.data);
@@ -26,7 +26,7 @@ const UsersList = () => {
 
     const deletePet = async (id) => {
         try {
-            const res = await axios.delete(`http://localhost:8080/pets/${id}`, {
+            const res = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/pets/${id}`, {
                 withCredentials: true,
             });
             const newPets = pets.filter((pet) => pet.petId !== id);

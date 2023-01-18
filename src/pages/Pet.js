@@ -33,7 +33,7 @@ const Pet = () => {
     const adoptOrFoster = async (e) => {
         try {
             const res = await axios.put(
-                `http://localhost:8080/pets/adopt/${petId}/${user.id}/${e.target.value}`,
+                `${process.env.REACT_APP_SERVER_URL}/pets/adopt/${petId}/${user.id}/${e.target.value}`,
                 null,
                 {
                     withCredentials: true,
@@ -49,7 +49,7 @@ const Pet = () => {
     const returnPet = async () => {
         try {
             const res = await axios.put(
-                `http://localhost:8080/pets/return/${petId}`,
+                `${process.env.REACT_APP_SERVER_URL}/pets/return/${petId}`,
                 null,
                 {
                     withCredentials: true,
@@ -66,7 +66,7 @@ const Pet = () => {
         try {
             console.log("Trying to save pet");
             const res = await axios.put(
-                `http://localhost:8080/pets/save/${petId}/${user.id}`,
+                `${process.env.REACT_APP_SERVER_URL}/pets/save/${petId}/${user.id}`,
                 null,
                 { withCredentials: true }
             );
@@ -81,7 +81,7 @@ const Pet = () => {
     const unSavePet = async (e) => {
         try {
             const res = await axios.put(
-                `http://localhost:8080/pets/unsave/${petId}/${user.id}`,
+                `${process.env.REACT_APP_SERVER_URL}/pets/unsave/${petId}/${user.id}`,
                 null,
                 {
                     withCredentials: true,
@@ -116,7 +116,7 @@ const Pet = () => {
 
         const fetchPet = async () => {
             const response = await axios.get(
-                `http://localhost:8080/pets/${petId}`
+                `${process.env.REACT_APP_SERVER_URL}/pets/${petId}`
             );
             const data = await response.data;
             if (isSubscribed) setPet(data);

@@ -17,7 +17,7 @@ const PetsListProvider = ({ children }) => {
     const fetchMyPets = useCallback(
         async (userId = user.id) => {
             const response = await axios.get(
-                `http://localhost:8080/pets/myPets/${userId}`,
+                `${process.env.REACT_APP_SERVER_URL}/pets/myPets/${userId}`,
                 {
                     withCredentials: true,
                 }
@@ -34,7 +34,7 @@ const PetsListProvider = ({ children }) => {
     const fetchSavedPets = useCallback(
         async (userId = user.id) => {
             const response = await axios.get(
-                `http://localhost:8080/pets/mySavedPets/${userId}`,
+                `${process.env.REACT_APP_SERVER_URL}/pets/mySavedPets/${userId}`,
                 { withCredentials: true }
             );
             const data = await response.data;

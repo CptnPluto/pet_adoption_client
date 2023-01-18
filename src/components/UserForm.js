@@ -56,7 +56,7 @@ const UserForm = ({ type }) => {
                 formData.append(key, editInfo[key]);
             }
             const response = await axios.put(
-                "http://localhost:8080/users/uploadPhoto",
+                `${process.env.REACT_APP_SERVER_URL}/users/uploadPhoto`,
                 formData,
                 { withCredentials: true }
             );
@@ -99,7 +99,7 @@ const UserForm = ({ type }) => {
                 user.password = changePass.oldPass;
                 user.newPass = changePass.newPass;
                 const response = await axios.put(
-                    "http://localhost:8080/users/changePass",
+                    `${process.env.REACT_APP_SERVER_URL}/users/changePass`,
                     user,
                     { withCredentials: true }
                 );

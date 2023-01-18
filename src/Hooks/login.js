@@ -11,7 +11,7 @@ const useLogin = () => {
             // const sendLoginInfo = JSON.stringify(loginInfo);
             console.log("logininfo", loginInfo);
             const res = await axios.post(
-                `http://localhost:8080/users/login`,
+                `${process.env.REACT_APP_SERVER_URL}/users/login`,
                 loginInfo,
                 { withCredentials: true }
             );

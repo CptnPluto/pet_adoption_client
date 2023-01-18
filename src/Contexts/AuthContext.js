@@ -44,7 +44,7 @@ const AuthContextProvider = ({ children }) => {
     //     const getUser = async () => {
     //         try {
     //             if (token) {
-    //                 const res = await axios.get("http://localhost:8080/users", {
+    //                 const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users`, {
     //                     headers: { Authorization: `Bearer ${token}` },
     //                 });
     //                 console.log("User: ", res.data);
@@ -63,7 +63,7 @@ const AuthContextProvider = ({ children }) => {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/users", {
+                const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users`, {
                     withCredentials: true,
                 });
                 console.log("User: ", res.data);
@@ -80,7 +80,7 @@ const AuthContextProvider = ({ children }) => {
             // const sendLoginInfo = JSON.stringify(loginInfo);
             console.log("logininfo", loginInfo);
             const res = await axios.post(
-                `http://localhost:8080/users/login`,
+                `${process.env.REACT_APP_SERVER_URL}/users/login`,
                 loginInfo
             );
             //NEW - NEEDS TESTING

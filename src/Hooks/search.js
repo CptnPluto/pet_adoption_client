@@ -7,7 +7,7 @@ const useSearch = () => {
     const search = useCallback(async (searchCriteria) => {
         console.log("in search hook", searchCriteria);
         const response = await axios.post(
-            "http://localhost:8080/pets/search",
+            `${process.env.REACT_APP_SERVER_URL}/pets/search`,
             searchCriteria
         );
         const data = response.data;

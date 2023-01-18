@@ -33,7 +33,7 @@ function App() {
     // need to add new method to logout - remove localStorage
     const handleLogout = async () => {
         dispatch({ type: "LOGOUT" });
-        await axios.get("http://localhost:8080/users/logout", {withCredentials: true});
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/logout`, {withCredentials: true});
         setShow(false);
         // setUser(false);
         console.log("Logout");

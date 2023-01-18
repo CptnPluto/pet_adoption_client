@@ -51,13 +51,13 @@ const PetForm = ({ handleSubmit, petData }) => {
                 if (petInfo.picture) {
                     console.log("Putting with pic");
                     const res = await axios.put(
-                        `http://localhost:8080/pets/updatePet/${petData.petId}`,
+                        `${process.env.REACT_APP_SERVER_URL}/pets/updatePet/${petData.petId}`,
                         formData
                     );
                 } else {
                     console.log("Putting with no pic");
                     const res = await axios.put(
-                        `http://localhost:8080/pets/updatePetNoPic/${petData.petId}`,
+                        `${process.env.REACT_APP_SERVER_URL}/pets/updatePetNoPic/${petData.petId}`,
                         petInfo
                     );
                 }
@@ -65,12 +65,12 @@ const PetForm = ({ handleSubmit, petData }) => {
                 if (petInfo.picture) {
                     console.log("Posting with pic");
                     const res = await axios.post(
-                        "http://localhost:8080/pets/addPet",
+                        `${process.env.REACT_APP_SERVER_URL}/pets/addPet`,
                         formData
                     );
                 } else {
                     const res = await axios.post(
-                        "http://localhost:8080/pets/addPetNoPic",
+                        `${process.env.REACT_APP_SERVER_URL}/pets/addPetNoPic`,
                         petInfo
                     );
                 }
@@ -84,7 +84,7 @@ const PetForm = ({ handleSubmit, petData }) => {
     return (
         <div className="form_container">
             <form
-                // action="http://localhost:8080/pets"
+                // action=`${process.env.REACT_APP_SERVER_URL}/pets`
                 // method="POST"
                 className="pet_form"
             >

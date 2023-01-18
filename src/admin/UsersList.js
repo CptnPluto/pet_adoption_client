@@ -18,7 +18,7 @@ const UsersList = () => {
     const fetchUsers = async () => {
         try {
             console.log("Token for fetchUsers: ", token);
-            const res = await axios.get("http://localhost:8080/users/all", {
+            const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/all`, {
                 withCredentials: true,
             });
             setUsers(res.data);

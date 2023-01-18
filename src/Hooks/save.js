@@ -9,7 +9,7 @@ const useSave = () => {
     const save = async (savedInfo) => {
         try {
             const res = await axios.put(
-                `http://localhost:8080/users/edit`,
+                `${process.env.REACT_APP_SERVER_URL}/users/edit`,
                 savedInfo,
                 { withCredentials: true }
             );
