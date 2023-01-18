@@ -65,7 +65,7 @@ const PetsListProvider = ({ children }) => {
             }
         };
         fetchPetLists();
-    }, [user, isSaved, fetchMyPets, fetchSavedPets]);
+    }, [user, isSaved]);
 
     return (
         <PetsListContext.Provider

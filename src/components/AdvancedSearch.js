@@ -13,7 +13,7 @@ const AdvancedSearch = ({ handleChange }) => {
             height: [minHeight, maxHeight],
             weight: [minWeight, maxWeight],
         });
-    }, [minHeight, maxHeight, minWeight, maxWeight, handleChange]);
+    }, [minHeight, maxHeight, minWeight, maxWeight]);
     return (
         <>
             <button
