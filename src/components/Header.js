@@ -1,8 +1,7 @@
 import useAuthContext from "../Hooks/useAuthContext";
 import BasicSearch from "./BasicSearch";
 
-const Header = ({ signUp }) => {
-    const { user } = useAuthContext();
+const Header = () => {
 
     return (
         <div className="header flex-col">

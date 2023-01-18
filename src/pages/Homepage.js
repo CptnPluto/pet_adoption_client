@@ -7,29 +7,30 @@ import AuthForm from "../components/AuthForm";
 
 import useAuthContext from "../Hooks/useAuthContext";
 
-const Homepage = ({ handleSignupButton}) => {
+const Homepage = ({ handleSignupButton }) => {
     const [show, setShow] = useState(false);
     const [login, setLogin] = useState(true);
     const { user } = useAuthContext();
 
-   
     return (
         <div className="container">
-            <Header
-                signUp={() => handleSignupButton()}
-            />
+            <Header />
             {/* If user is logged in, show My Pets, Profile Settings, and Logout buttons */}
 
             {!user && (
                 <div className="section">
                     <h1 className="content">
                         Not a member?
-                        <button type="button" onClick={handleSignupButton} className="home_signup">
+                        <button
+                            type="button"
+                            onClick={handleSignupButton}
+                            className="home_signup"
+                        >
                             Sign Up!
                         </button>
                     </h1>
-                    </div>
-                )}
+                </div>
+            )}
             {user && (
                 <>
                     <div className="section">
@@ -59,4 +60,3 @@ const Homepage = ({ handleSignupButton}) => {
 };
 
 export default Homepage;
-
