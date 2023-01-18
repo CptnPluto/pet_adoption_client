@@ -42,7 +42,6 @@ const AuthContextProvider = ({ children }) => {
                         withCredentials: true,
                     }
                 );
-                console.log("User: ", res.data);
                 dispatch({ type: "AUTH_IS_READY", payload: res.data });
             } catch (err) {
                 console.log(err);
@@ -54,12 +53,10 @@ const AuthContextProvider = ({ children }) => {
 
     const login = async (loginInfo) => {
         try {
-            console.log("logininfo", loginInfo);
             const res = await axios.post(
                 `${process.env.REACT_APP_SERVER_URL}/users/login`,
                 loginInfo
             );
-            console.log("Returned data: ", res);
             if (res.data.token) {
                 localStorage.setItem("token", res.data.token);
             }

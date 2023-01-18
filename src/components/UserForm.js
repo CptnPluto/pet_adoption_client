@@ -36,13 +36,12 @@ const UserForm = ({ type }) => {
             setError(valErrorMessage);
 
             const res = await save(editInfo);
-            console.log("result: ", res);
             if (res.ok) {
                 dispatch({ type: "UPDATE_USER", payload: editInfo });
                 setRender(!render);
             }
         } catch (error) {
-            console.log("setting error");
+            console.log("setting error: ", error);
             setError("Error saving: " + error.response.data);
         }
     };
@@ -55,13 +54,16 @@ const UserForm = ({ type }) => {
                 formData.append(key, editInfo[key]);
             }
             await axios.put(
-                `${process.env.REACT_APP_SERVER_URL}/users/uploadPhoto`,
+                console.log(
+                    "Putting in: ",
+                    process.env.REACT_APP_SERVER_URL + "/users/uploadPhoto"
+                )`${process.env.REACT_APP_SERVER_URL}/users/uploadPhoto`,
                 formData,
                 { withCredentials: true }
             );
             setRender(!render);
         } catch (error) {
-            console.log("setting error");
+            console.log("setting error: ", error);
             setError("Error saving: " + error.response.data);
         }
     };
@@ -90,7 +92,6 @@ const UserForm = ({ type }) => {
 
     const handlePassSubmit = async (e) => {
         e.preventDefault();
-        console.log("Change password click: ", changePass);
 
         if (changePass.newPass === changePass.confirmPass) {
             try {
@@ -105,7 +106,7 @@ const UserForm = ({ type }) => {
                 setError("");
                 setShow(false);
             } catch (error) {
-                console.log("setting error");
+                console.log("setting error: ", error);
                 setError("Error changing password: " + error.response.data);
             }
         } else {
@@ -115,7 +116,6 @@ const UserForm = ({ type }) => {
     };
 
     const resetFields = () => {
-        console.log("resetting");
         setChangePass({
             oldPass: "",
             newPass: "",

@@ -29,11 +29,9 @@ function App() {
             withCredentials: true,
         });
         setShow(false);
-        console.log("Logout");
     };
 
     const handleLoginButton = () => {
-        console.log("login button clicked");
         setLogin(true);
         setShow(true);
     };
@@ -44,11 +42,9 @@ function App() {
     };
 
     const handleSearch = () => {
-        console.log("search button clicked");
         navigate("/search");
     };
 
-    console.log("show: ", show);
     return (
         <>
             {authIsReady && (
