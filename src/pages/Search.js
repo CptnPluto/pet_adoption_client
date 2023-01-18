@@ -36,7 +36,7 @@ const Search = () => {
                             <PetCard key={pet.petId} pet={pet} />
                         ))}
                     {petsList.length < 1 && (
-                        <div>Sorry, no results found. Please try again.</div>
+                        <div className="message">Sorry, no results found. Please try again.</div>
                     )}
                 </div>
 
