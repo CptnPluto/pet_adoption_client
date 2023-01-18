@@ -19,12 +19,9 @@ const SignupForm = ({ toggleLoginSignup }) => {
 
     const handleSignup = async (e) => {
         e.preventDefault();
-        console.log("signupInfo: ", signupInfo);
         signupFormValidation(signupInfo, password2);
-        // setError(valErrorMessage);
         await signup(signupInfo);
         toggleLoginSignup();
-        // setError(errorMessage);
     };
 
     const handleInputChange = (e) => {
@@ -32,11 +29,9 @@ const SignupForm = ({ toggleLoginSignup }) => {
             ...signupInfo,
             [e.target.name]: e.target.value,
         });
-        console.log("signupInfo: ", signupInfo);
     };
 
     const handlePassConf = (e) => {
-        console.log("password2: ", e.target.value);
         setPassword2(e.target.value);
     };
 
@@ -59,7 +54,6 @@ const SignupForm = ({ toggleLoginSignup }) => {
 
     useEffect(() => {
         setError(errorMessage || valErrorMessage);
-        console.log("setting error: ", errorMessage);
     }, [errorMessage, valErrorMessage]);
 
     return (

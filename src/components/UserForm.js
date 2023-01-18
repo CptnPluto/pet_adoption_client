@@ -1,4 +1,3 @@
-// import "../AppCSS.css";
 import "./UserForm.css";
 import { useState, useEffect } from "react";
 
@@ -8,7 +7,7 @@ import useAuthContext from "../Hooks/useAuthContext";
 import axios from "axios";
 
 const UserForm = ({ type }) => {
-    const { user, token } = useAuthContext();
+    const { user } = useAuthContext();
     const [disabled, setDisabled] = useState(true);
     const [show, setShow] = useState(false);
     const [render, setRender] = useState(false);
@@ -26,8 +25,6 @@ const UserForm = ({ type }) => {
     const { save, saveErrorMessage } = useSave();
     const { editFormValidation, valErrorMessage } = useValidation();
 
-    // Do I need to add isLoading here? And all other places like this?
-    // probably something better to do with error handling, here. Like throwing to the catch, etc.
     const handleSave = async (e) => {
         e.preventDefault();
         try {
@@ -50,17 +47,15 @@ const UserForm = ({ type }) => {
     const uploadPhoto = async (e) => {
         e.preventDefault();
         try {
-            console.log("uploadPhoto: ", editInfo);
             const formData = new FormData();
             for (let key in editInfo) {
                 formData.append(key, editInfo[key]);
             }
-            const response = await axios.put(
+            await axios.put(
                 `${process.env.REACT_APP_SERVER_URL}/users/uploadPhoto`,
                 formData,
                 { withCredentials: true }
             );
-            console.log("response: ", response);
             setRender(!render);
         } catch (error) {
             console.log("setting error");
@@ -98,7 +93,7 @@ const UserForm = ({ type }) => {
             try {
                 user.password = changePass.oldPass;
                 user.newPass = changePass.newPass;
-                const response = await axios.put(
+                await axios.put(
                     `${process.env.REACT_APP_SERVER_URL}/users/changePass`,
                     user,
                     { withCredentials: true }
@@ -111,7 +106,6 @@ const UserForm = ({ type }) => {
                 setError("Error changing password: " + error.response.data);
             }
 
-            // setError(saveErrorMessage);
         } else {
             console.log("Passwords do not match");
             setError("Passwords do not match");

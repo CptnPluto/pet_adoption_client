@@ -7,7 +7,6 @@ const authReducer = (state, action) => {
     switch (action.type) {
         case "LOGIN":
             console.log("LOGIN");
-            // localStorage.setItem("USER", JSON.stringify(action.payload));
             return { ...state, user: action.payload };
         case "LOGOUT":
             console.log("LOGOUT");
@@ -28,37 +27,8 @@ const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, {
         user: JSON.parse(localStorage.getItem("USER")),
         error: "",
-        // token: localStorage.getItem("token") || "",
         authIsReady: false,
     });
-
-    // const { login } = useLogin();
-    // const { signup } = useSignup();
-
-    // let isAuthed = state.user ? true : false;
-
-    // TD: Need to implement this on BE.
-    // useEffect(() => {
-    //     const token = localStorage.getItem("token");
-    //     console.log("Token: ", token);
-    //     const getUser = async () => {
-    //         try {
-    //             if (token) {
-    //                 const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users`, {
-    //                     headers: { Authorization: `Bearer ${token}` },
-    //                 });
-    //                 console.log("User: ", res.data);
-    //                 dispatch({ type: "AUTH_IS_READY", payload: res.data });
-    //             } else {
-    //                 console.log("no token");
-    //                 dispatch({ type: "AUTH_IS_READY", payload: null });
-    //             }
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
-    //     };
-    //     getUser();
-    // }, []);
 
     useEffect(() => {
         const getUser = async () => {
@@ -81,20 +51,16 @@ const AuthContextProvider = ({ children }) => {
 
     const login = async (loginInfo) => {
         try {
-            // const sendLoginInfo = JSON.stringify(loginInfo);
             console.log("logininfo", loginInfo);
             const res = await axios.post(
                 `${process.env.REACT_APP_SERVER_URL}/users/login`,
                 loginInfo
             );
-            //NEW - NEEDS TESTING
-            //ADD TOKEN TO STATE in authContext
             console.log("Returned data: ", res);
             if (res.data.token) {
                 localStorage.setItem("token", res.data.token);
             }
             dispatch({ type: "LOGIN", payload: res.data.user });
-            // add a navigate to home page
         } catch (err) {
             dispatch({ type: "ERROR", payload: err.response.data });
         }

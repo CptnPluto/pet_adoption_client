@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import useAuthContext from "../Hooks/useAuthContext";
@@ -12,18 +12,13 @@ const Pet = () => {
     const urlParams = new URLSearchParams(queryStr);
     const petId = urlParams.get("id");
 
-    // console.log("params: ", useParams());
-    // const { petId } = useParams();
-
     const [pet, setPet] = useState("");
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState("");
     const [render, setRender] = useState(false);
 
-    const { setSavedPetIds, savedPetIds, fetchSavedPets, isSaved, setIsSaved } =
-        usePetsListContext();
-    const [isPetSaved, setIsPetSaved] = useState("");
-    const { user, token } = useAuthContext();
+    const { savedPetIds, isSaved, setIsSaved } = usePetsListContext();
+    const { user } = useAuthContext();
     const navigate = useNavigate();
 
     const handleSubmit = () => {
@@ -64,14 +59,12 @@ const Pet = () => {
 
     const savePet = async (e) => {
         try {
-            console.log("Trying to save pet");
             const res = await axios.put(
                 `${process.env.REACT_APP_SERVER_URL}/pets/save/${petId}/${user.id}`,
                 null,
                 { withCredentials: true }
             );
             if (!res.data.ok) throw new Error("Error updating pet status");
-            console.log("saving pet");
             setIsSaved(true);
         } catch (error) {
             console.log(error);
@@ -88,7 +81,6 @@ const Pet = () => {
                 }
             );
             if (!res.data.ok) throw new Error("Error updating pet status");
-            console.log("unsaving pet: ", res.data);
             setIsSaved(false);
         } catch (error) {
             console.log(error);
@@ -122,7 +114,7 @@ const Pet = () => {
             if (isSubscribed) setPet(data);
             messageSet(data);
             for (const id of savedPetIds) {
-                if (id === pet.petId) {
+                if (id === petId) {
                     setIsSaved(true);
                 }
             }
@@ -135,7 +127,7 @@ const Pet = () => {
         }
 
         return () => (isSubscribed = false);
-    }, [user, savedPetIds, render]);
+    }, [user, savedPetIds, render, petId, setIsSaved]);
 
     return (
         <>
@@ -240,9 +232,6 @@ const Pet = () => {
                                 >
                                     Back MyPets
                                 </button>
-                                // <NavButton navLink="/mypets">
-                                //     Back to My Pets
-                                // </NavButton>
                             )}
                             <button
                                 type="button"

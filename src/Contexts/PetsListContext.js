@@ -7,7 +7,7 @@ import { useCallback } from "react";
 const PetsListContext = createContext();
 
 const PetsListProvider = ({ children }) => {
-    const { user, token } = useAuthContext();
+    const { user } = useAuthContext();
 
     const [savedPets, setSavedPets] = useState([]);
     const [savedPetIds, setSavedPetIds] = useState([]);
@@ -28,7 +28,7 @@ const PetsListProvider = ({ children }) => {
             //     setMyPets([...data]);
             // }
         },
-        [token, user]
+        [user]
     );
 
     const fetchSavedPets = useCallback(
@@ -44,7 +44,7 @@ const PetsListProvider = ({ children }) => {
             //     setSavedPets([...data]);
             // }
         },
-        [token, user]
+        [user]
     );
 
     useEffect(() => {
@@ -65,7 +65,7 @@ const PetsListProvider = ({ children }) => {
             }
         };
         fetchPetLists();
-    }, [user, isSaved]);
+    }, [user, isSaved, fetchMyPets, fetchSavedPets]);
 
     return (
         <PetsListContext.Provider

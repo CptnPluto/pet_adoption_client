@@ -35,18 +35,9 @@ const Search = () => {
                         petsList.map((pet) => (
                             <PetCard key={pet.petId} pet={pet} />
                         ))}
-                        {petsList.length < 1 && (
-                            <div>Sorry, no results found. Please try again.</div>
-                        )}
-                    {/* {!pets
-                ? "Loading..."
-                : pets.map((pet) => {
-                      <>
-                          <PetCard key={pet.name} pet={pet} />
-                          <div>test</div>
-                      </>;
-                      // return <div key={pet.name}>{pet.name}: {pet.type}</div>;
-                  })} */}
+                    {petsList.length < 1 && (
+                        <div>Sorry, no results found. Please try again.</div>
+                    )}
                 </div>
 
                 <NavButton navLink="/">Back to Homepage</NavButton>

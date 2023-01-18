@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 const Modal = ({ onClose, title, children }) => {
     // Close modal on escape key press
-    // Use useCallback to prevent useEffect warning: missing dependency.
+    
     const closeOnEscapeKeyDown = useCallback(
         (e) => {
             if ((e.charCode || e.keyCode) === 27) {
@@ -14,10 +14,8 @@ const Modal = ({ onClose, title, children }) => {
     );
 
     useEffect(() => {
-        // document.body.style.overflow = 'hidden';
         document.addEventListener("keydown", closeOnEscapeKeyDown);
         return () => {
-            // document.body.style.overflow = 'unset';
             document.removeEventListener("keydown", closeOnEscapeKeyDown);
         };
     }, [closeOnEscapeKeyDown]);

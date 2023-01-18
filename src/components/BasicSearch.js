@@ -1,21 +1,11 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useSearchContext from "../Hooks/useSearchContext";
 
 const BasicSearch = () => {
-    const { searchCriteria, handleSearch, handleChange } = useSearchContext();
-    const [basicSearchCriteria, setBasicSearchCriteria] = useState("");
+    const { handleSearch, handleChange } = useSearchContext();
     const navigate = useNavigate();
 
-    // const handleChange = async (e) => {
-    //     // TD: use searchCriteriaContext to set search criteria
-    //     setBasicSearchCriteria(e.target.value);
-    //     console.log("basicSearchCriteria", basicSearchCriteria);
-    // };
-
     const handleClick = async () => {
-        //TD: use searchCriteriaContext to set search criteria
-        console.log("searchCriteria: ", searchCriteria);
         await handleSearch();
         navigate("/search");
     };

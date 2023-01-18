@@ -1,10 +1,5 @@
-// Create an <AdvancedSearch> component that renders a form with the following fields: type, breed, height, weight, name, color, hypoallergenic, dietary
-// restrictions, and age. The form should have a submit button that calls a function that will make a GET request to the server with the search
-// criteria. The search criteria should be passed to the <AdvancedSearch> component as props. The <AdvancedSearch> component should be rendered
-// in the <Header> component.
 import { useState, useEffect } from "react";
 import MultiRangeSlider from "multi-range-slider-react";
-import useSearchContext from "../Hooks/useSearchContext";
 
 const AdvancedSearch = ({ handleChange }) => {
     const [showAdvanced, setShowAdvanced] = useState(false);
@@ -12,21 +7,13 @@ const AdvancedSearch = ({ handleChange }) => {
     const [maxHeight, setMaxHeight] = useState(150);
     const [minWeight, setMinWeight] = useState(0);
     const [maxWeight, setMaxWeight] = useState(200);
-    // const { searchCriteria, setSearchCriteria } = useSearchContext();
-
-    console.log("Height Range: ", minHeight, maxHeight);
-    console.log("Weight Range: ", minWeight, maxWeight);
 
     useEffect(() => {
-        // console.log({
-        //     height: [minHeight, maxHeight],
-        //     weight: [minWeight, maxWeight],
-        // });
         handleChange({
             height: [minHeight, maxHeight],
             weight: [minWeight, maxWeight],
         });
-    }, [minHeight, maxHeight, minWeight, maxWeight]);
+    }, [minHeight, maxHeight, minWeight, maxWeight, handleChange]);
     return (
         <>
             <button
@@ -71,10 +58,6 @@ const AdvancedSearch = ({ handleChange }) => {
                                     setMinWeight(e.minValue);
                                     setMaxWeight(e.maxValue);
                                 }}
-                                // onChange={(e) => {
-                                //     setMinValue2(e.minValue);
-                                //     setMaxValue2(e.maxValue);
-                                // }}
                             ></MultiRangeSlider>
                         </div>
                         {/* <select

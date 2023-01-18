@@ -1,8 +1,6 @@
 import UsersList from "./UsersList";
 import PetsList from "./PetsList";
-import NavButton from "../components/NavButton";
 import "./AdminDash.css";
-import Modal from "../components/Modal";
 import AddPet from "./AddPet";
 
 const AdminDash = () => {

@@ -1,23 +1,19 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Modal from "../components/Modal";
-import { useNavigate } from "react-router-dom";
 import NavButton from "../components/NavButton";
-import useAuthContext from "../Hooks/useAuthContext";
 
 const UsersList = () => {
-    const { token } = useAuthContext();
     const [pets, setPets] = useState([]);
-    const [show, setShow] = useState(false);
-    const [chosenUser, setChosenUser] = useState("");
-    const navigate = useNavigate();
 
     const fetchPets = async () => {
         try {
-            const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pets`, {
-                withCredentials: true,
-            });
+            const res = await axios.get(
+                `${process.env.REACT_APP_SERVER_URL}/pets`,
+                {
+                    withCredentials: true,
+                }
+            );
             setPets(res.data);
         } catch (error) {
             console.log(error);
@@ -26,9 +22,12 @@ const UsersList = () => {
 
     const deletePet = async (id) => {
         try {
-            const res = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/pets/${id}`, {
-                withCredentials: true,
-            });
+            await axios.delete(
+                `${process.env.REACT_APP_SERVER_URL}/pets/${id}`,
+                {
+                    withCredentials: true,
+                }
+            );
             const newPets = pets.filter((pet) => pet.petId !== id);
             setPets(newPets);
         } catch (error) {

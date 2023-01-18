@@ -23,7 +23,6 @@ const PetForm = ({ handleSubmit, petData }) => {
 
     const handleChange = (e) => {
         if (e.target.name === "picture") {
-            console.log("picture: ", e.target.files[0]);
             setPetInfo({
                 ...petInfo,
                 [e.target.name]: e.target.files[0],
@@ -33,7 +32,6 @@ const PetForm = ({ handleSubmit, petData }) => {
                 ...prevState,
                 [e.target.name]: e.target.value,
             }));
-            console.log("petInfo: ", petInfo);
         }
     };
 
@@ -41,7 +39,6 @@ const PetForm = ({ handleSubmit, petData }) => {
         e.preventDefault();
         try {
             axios.defaults.withCredentials = true;
-            console.log(petInfo);
             const formData = new FormData();
             for (let key in petInfo) {
                 formData.append(key, petInfo[key]);
@@ -49,27 +46,24 @@ const PetForm = ({ handleSubmit, petData }) => {
 
             if (petData) {
                 if (petInfo.picture) {
-                    console.log("Putting with pic");
-                    const res = await axios.put(
+                    await axios.put(
                         `${process.env.REACT_APP_SERVER_URL}/pets/updatePet/${petData.petId}`,
                         formData
                     );
                 } else {
-                    console.log("Putting with no pic");
-                    const res = await axios.put(
+                    await axios.put(
                         `${process.env.REACT_APP_SERVER_URL}/pets/updatePetNoPic/${petData.petId}`,
                         petInfo
                     );
                 }
             } else {
                 if (petInfo.picture) {
-                    console.log("Posting with pic");
-                    const res = await axios.post(
+                    await axios.post(
                         `${process.env.REACT_APP_SERVER_URL}/pets/addPet`,
                         formData
                     );
                 } else {
-                    const res = await axios.post(
+                    await axios.post(
                         `${process.env.REACT_APP_SERVER_URL}/pets/addPetNoPic`,
                         petInfo
                     );
@@ -84,8 +78,6 @@ const PetForm = ({ handleSubmit, petData }) => {
     return (
         <div className="form_container">
             <form
-                // action=`${process.env.REACT_APP_SERVER_URL}/pets`
-                // method="POST"
                 className="pet_form"
             >
                 <h1>Pet Details</h1>

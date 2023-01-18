@@ -1,7 +1,7 @@
 import useAuthContext from "../Hooks/useAuthContext";
 import BasicSearch from "./BasicSearch";
 
-const Header = ({ login, logout, signUp, search }) => {
+const Header = ({ signUp }) => {
     const { user } = useAuthContext();
 
     return (
@@ -20,29 +20,6 @@ const Header = ({ login, logout, signUp, search }) => {
                     </h3>
                 )}
                 <BasicSearch />
-                {/* <div className="search">
-                    <select
-                        name="searchDropdown"
-                        id="searchDropdown"
-                        onChange={(e) => handleChange(e)}
-                    >
-                        <option value="search" hidden>
-                            Search our animal database!
-                        </option>
-                        <option value="dogs">Dogs</option>
-                        <option value="cats">Cats</option>
-                        <option value="birds">Birds</option>
-                        <option value="reptiles">Reptiles</option>
-                        <option value="small animals">Small Animals</option>
-                    </select>
-                    <button
-                        type="button"
-                        onClick={search}
-                        animal={basicSearchCriteria}
-                    >
-                        Search
-                    </button>
-                </div> */}
             </div>
         </div>
     );

@@ -5,7 +5,6 @@ const useValidation = () => {
 
     const signupFormValidation = (signupInfo, password2) => {
         const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
-        //const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if (!emailRegex.test(signupInfo.email)) {
             setValErrorMessage("Error: Invalid email format");
             throw new Error("Invalid email");

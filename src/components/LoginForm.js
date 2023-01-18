@@ -30,7 +30,6 @@ const LoginForm = ({ toggleLoginSignup }) => {
     // Upon receiving an errorMessage from login, setError.
     useEffect(() => {
         setError(errorMessage);
-        console.log("setting error: ", errorMessage);
     }, [errorMessage]);
 
     // Enable submit if all fields have entries.

@@ -18,10 +18,6 @@ const MyPets = () => {
         }
     }, [fetchMyPets, fetchSavedPets]);
 
-    console.log("Saved pets: ", savedPets);
-    console.log("My pets: ", myPets);
-    console.log("Saved pets length: ", savedPets.length);
-
     return (
         <div className="mypets-container">
             <h2>My Pets</h2>

@@ -1,7 +1,3 @@
-//TD: Make profile, mypets, pet, addpet, dashboard private routes
-//TD: Make profile form and signup form use the same component
-//UPDATE: Made two forms, and combined into Auth. May adjust in the future.
-
 import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
 import MyPets from "./pages/MyPets";
@@ -30,12 +26,10 @@ function App() {
     const [login, setLogin] = useState(true);
     const navigate = useNavigate();
 
-    // need to add new method to logout - remove localStorage
     const handleLogout = async () => {
         dispatch({ type: "LOGOUT" });
         await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/logout`, {withCredentials: true});
         setShow(false);
-        // setUser(false);
         console.log("Logout");
     };
 
@@ -51,7 +45,6 @@ function App() {
     };
 
     const handleSearch = () => {
-        //TD: use searchCriteriaContext to set search criteria
         console.log("search button clicked");
         navigate("/search");
     };

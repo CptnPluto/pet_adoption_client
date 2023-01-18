@@ -1,23 +1,20 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Modal from "../components/Modal";
 import usePetsListContext from "../Hooks/usePetsListContext";
 import NavButton from "../components/NavButton";
 import "./AdminDash.css";
-import useAuthContext from "../Hooks/useAuthContext";
 
 const UsersList = () => {
-    const { token } = useAuthContext();
     const [users, setUsers] = useState([]);
     const [show, setShow] = useState(false);
     const [chosenUser, setChosenUser] = useState("");
     const { myPets, savedPets, fetchMyPets, fetchSavedPets } =
         usePetsListContext();
 
-    const fetchUsers = async () => {
+    const fetchUsers = useCallback(async () => {
         try {
-            console.log("Token for fetchUsers: ", token);
             const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/all`, {
                 withCredentials: true,
             });
@@ -25,11 +22,11 @@ const UsersList = () => {
         } catch (error) {
             console.log(error);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchUsers();
-    }, []);
+    }, [fetchUsers]);
 
     const showDetails = async (user) => {
         console.log(user);
