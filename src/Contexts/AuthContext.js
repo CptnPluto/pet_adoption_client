@@ -63,13 +63,17 @@ const AuthContextProvider = ({ children }) => {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users`, {
-                    withCredentials: true,
-                });
+                const res = await axios.get(
+                    `${process.env.REACT_APP_SERVER_URL}/users`,
+                    {
+                        withCredentials: true,
+                    }
+                );
                 console.log("User: ", res.data);
                 dispatch({ type: "AUTH_IS_READY", payload: res.data });
             } catch (err) {
                 console.log(err);
+                dispatch({ type: "AUTH_IS_READY", payload: null });
             }
         };
         getUser();
