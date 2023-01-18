@@ -22,7 +22,7 @@ const UserForm = ({ type }) => {
         newPass: "",
         confirmPass: "",
     });
-    const { save, saveErrorMessage } = useSave();
+    const { save } = useSave();
     const { editFormValidation, valErrorMessage } = useValidation();
 
     const handleSave = async (e) => {
@@ -37,7 +37,6 @@ const UserForm = ({ type }) => {
 
             const res = await save(editInfo);
             console.log("result: ", res);
-            // setError(saveErrorMessage);
             if (res.ok) {
                 dispatch({ type: "UPDATE_USER", payload: editInfo });
                 setRender(!render);

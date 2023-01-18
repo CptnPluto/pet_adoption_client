@@ -1,4 +1,3 @@
-import useAuthContext from "../Hooks/useAuthContext";
 import BasicSearch from "./BasicSearch";
 
 const Header = () => {
