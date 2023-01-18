@@ -17,7 +17,8 @@ const Pet = () => {
     const [message, setMessage] = useState("");
     const [render, setRender] = useState(false);
 
-    const { savedPetIds, isSaved, setIsSaved } = usePetsListContext();
+    const { setSavedPetIds, savedPetIds, isSaved, setIsSaved } =
+        usePetsListContext();
     const { user } = useAuthContext();
     const navigate = useNavigate();
 
@@ -36,6 +37,11 @@ const Pet = () => {
                 }
             );
             if (!res.data.ok) throw new Error("Error updating pet status");
+            if (savedPetIds.includes(petId)) {
+                setIsSaved(false);
+                const newSavedPets = savedPetIds.filter((id) => id !== petId);
+                setSavedPetIds(newSavedPets);
+            }
             setRender(!render);
         } catch (error) {
             console.log(error);
@@ -67,6 +73,7 @@ const Pet = () => {
             );
             if (!res.data.ok) throw new Error("Error updating pet status");
             setIsSaved(true);
+            setRender(!render);
         } catch (error) {
             console.log(error);
         }
@@ -130,6 +137,7 @@ const Pet = () => {
         return () => (isSubscribed = false);
     }, [user, savedPetIds, render, petId, setIsSaved]);
 
+    console.log("Is saved: ", isSaved);
     return (
         <>
             {!pet || !message ? (
@@ -201,7 +209,9 @@ const Pet = () => {
                                         </button>
                                     ) : (
                                         <>
-                                            {!isSaved ? (
+                                            {!savedPetIds.includes(
+                                                pet.petId
+                                            ) ? (
                                                 <button
                                                     type="button"
                                                     value="Saved"
