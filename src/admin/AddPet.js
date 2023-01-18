@@ -3,11 +3,12 @@ import PetForm from "../components/PetForm";
 import Modal from "../components/Modal";
 import { useState } from "react";
 
-const AddPet = () => {
+const AddPet = ({ render }) => {
     const [show, setShow] = useState(false);
 
     const handleSubmit = () => {
         setShow(false);
+        render();
     };
 
     return (

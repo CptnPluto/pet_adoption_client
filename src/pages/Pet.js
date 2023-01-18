@@ -23,6 +23,7 @@ const Pet = () => {
 
     const handleSubmit = () => {
         setShow(false);
+        setRender(!render);
     };
 
     const adoptOrFoster = async (e) => {
