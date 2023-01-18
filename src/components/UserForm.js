@@ -7,7 +7,7 @@ import useAuthContext from "../Hooks/useAuthContext";
 import axios from "axios";
 
 const UserForm = ({ type }) => {
-    const { user } = useAuthContext();
+    const { user, dispatch } = useAuthContext();
     const [disabled, setDisabled] = useState(true);
     const [show, setShow] = useState(false);
     const [render, setRender] = useState(false);
@@ -35,9 +35,13 @@ const UserForm = ({ type }) => {
             editFormValidation(editInfo);
             setError(valErrorMessage);
 
-            await save(editInfo);
-            setError(saveErrorMessage);
-            setRender(!render);
+            const res = await save(editInfo);
+            console.log("result: ", res);
+            // setError(saveErrorMessage);
+            if (res.ok) {
+                dispatch({ type: "UPDATE_USER", payload: editInfo });
+                setRender(!render);
+            }
         } catch (error) {
             console.log("setting error");
             setError("Error saving: " + error.response.data);
@@ -105,7 +109,6 @@ const UserForm = ({ type }) => {
                 console.log("setting error");
                 setError("Error changing password: " + error.response.data);
             }
-
         } else {
             console.log("Passwords do not match");
             setError("Passwords do not match");

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import NavButton from "../components/NavButton";
 
-const UsersList = () => {
+const PetsList = () => {
     const [pets, setPets] = useState([]);
 
     const fetchPets = async () => {
@@ -87,4 +87,4 @@ const UsersList = () => {
     );
 };
 
-export default UsersList;
+export default PetsList;

@@ -17,6 +17,9 @@ const authReducer = (state, action) => {
         case "ERROR":
             console.log("ERROR");
             return { ...state, error: action.payload };
+        case "UPDATE_USER":
+            console.log("UPDATE_USER");
+            return { ...state, user: action.payload };
         default:
             console.log("No ACTION");
             return state;
