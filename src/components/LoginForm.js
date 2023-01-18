@@ -46,7 +46,7 @@ const LoginForm = ({ toggleLoginSignup }) => {
 
     return (
         <>
-            <div className="login">
+            <div className="authform">
                 <h3>Login</h3>
                 <form onSubmit={handleLogin}>
                     <label htmlFor="email">Email</label>
@@ -70,14 +70,13 @@ const LoginForm = ({ toggleLoginSignup }) => {
                         Login
                     </button>
                 </form>
-            </div>
-
-            <p>{error}</p>
-            <div className="switch">
-                <p>Not yet a member?</p>
-                <button type="button" onClick={toggleLoginSignup}>
-                    Sign Up!
-                </button>
+                <p>{error}</p>
+                <div className="switch">
+                    <p>Not yet a member?</p>
+                    <button type="button" onClick={toggleLoginSignup}>
+                        Sign Up!
+                    </button>
+                </div>
             </div>
         </>
     );

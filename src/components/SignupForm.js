@@ -58,7 +58,7 @@ const SignupForm = ({ toggleLoginSignup }) => {
 
     return (
         <>
-            <div className="signup">
+            <div className="authform">
                 <h3>Signup</h3>
                 <form onSubmit={handleSignup}>
                     <label htmlFor="first-name">First Name</label>
@@ -106,13 +106,13 @@ const SignupForm = ({ toggleLoginSignup }) => {
                         Signup
                     </button>
                 </form>
-            </div>
-            <p>{error}</p>
-            <div className="switch">
-                <p>Already have an account?</p>
-                <button type="button" onClick={toggleLoginSignup}>
-                    Login!
-                </button>
+                <p className="error">{error}</p>
+                <div className="switch">
+                    <p>Already have an account?</p>
+                    <button type="button" onClick={toggleLoginSignup}>
+                        Login!
+                    </button>
+                </div>
             </div>
         </>
     );

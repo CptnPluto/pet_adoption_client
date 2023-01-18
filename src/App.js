@@ -8,10 +8,7 @@ import AuthForm from "./components/AuthForm";
 import Navbar from "./components/Navbar";
 import useAuthContext from "./Hooks/useAuthContext";
 import AdminDash from "./admin/AdminDash";
-import {
-    PrivateAdminRoute,
-    PrivateUserRoute,
-} from "./routes/AuthedRoutes";
+import { PrivateAdminRoute, PrivateUserRoute } from "./routes/AuthedRoutes";
 
 import "./AppCSS.css";
 
@@ -28,7 +25,9 @@ function App() {
 
     const handleLogout = async () => {
         dispatch({ type: "LOGOUT" });
-        await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/logout`, {withCredentials: true});
+        await axios.get(`${process.env.REACT_APP_SERVER_URL}/users/logout`, {
+            withCredentials: true,
+        });
         setShow(false);
         console.log("Logout");
     };
@@ -49,6 +48,7 @@ function App() {
         navigate("/search");
     };
 
+    console.log("show: ", show);
     return (
         <>
             {authIsReady && (
@@ -102,7 +102,6 @@ function App() {
                                     </div>
                                 }
                             />
-                            
                         </Routes>
                         {!user && (
                             <>
@@ -110,6 +109,7 @@ function App() {
                                     <Modal
                                         show={show}
                                         onClose={() => setShow(false)}
+                                        title="Authentication"
                                     >
                                         <AuthForm
                                             login={login}

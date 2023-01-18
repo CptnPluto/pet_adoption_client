@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-const Modal = ({ onClose, title, children }) => {
+const Modal = ({ onClose, title, children, show }) => {
     // Close modal on escape key press
-    
+    const modalRef = useRef();
+
     const closeOnEscapeKeyDown = useCallback(
         (e) => {
             if ((e.charCode || e.keyCode) === 27) {
@@ -14,6 +15,9 @@ const Modal = ({ onClose, title, children }) => {
     );
 
     useEffect(() => {
+        setTimeout(() => {
+            modalRef.current.classList.add("active");
+        }, 10);
         document.addEventListener("keydown", closeOnEscapeKeyDown);
         return () => {
             document.removeEventListener("keydown", closeOnEscapeKeyDown);
@@ -21,18 +25,12 @@ const Modal = ({ onClose, title, children }) => {
     }, [closeOnEscapeKeyDown]);
 
     return (
-        <div className="modal" onClick={onClose}>
+        <div ref={modalRef} className="modal fade-in" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-header">
                     <h2 className="modal-title">{title}</h2>
                 </div>
                 <div className="modal-body">{children}</div>
-                <div className="modal-footer">
-                    <h3>Footer</h3>
-                    <button className="button" onClick={onClose}>
-                        Close
-                    </button>
-                </div>
             </div>
         </div>
     );
