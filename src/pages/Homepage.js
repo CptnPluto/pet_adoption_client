@@ -24,7 +24,7 @@ const Homepage = ({ handleSignupButton}) => {
                 <div className="section">
                     <h1 className="content">
                         Not a member?
-                        <button type="button" onClick={handleSignupButton}>
+                        <button type="button" onClick={handleSignupButton} className="home_signup">
                             Sign Up!
                         </button>
                     </h1>

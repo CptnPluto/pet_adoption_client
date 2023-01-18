@@ -40,6 +40,14 @@ button {
     border-style: none;
 }
 
+.home_signup {
+    width: 18%;
+    height: 10%;
+    font-size: 1.5rem;
+    margin: 1rem;
+
+}
+
 button:hover {
     background-color: #0059b8;
 }
