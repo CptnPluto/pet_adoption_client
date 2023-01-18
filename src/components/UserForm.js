@@ -53,18 +53,15 @@ const UserForm = ({ type }) => {
             for (let key in editInfo) {
                 formData.append(key, editInfo[key]);
             }
-            await axios.put(
-                console.log(
-                    "Putting in: ",
-                    process.env.REACT_APP_SERVER_URL + "/users/uploadPhoto"
-                )`${process.env.REACT_APP_SERVER_URL}/users/uploadPhoto`,
+            await axios.put(                    
+                `${process.env.REACT_APP_SERVER_URL}/users/uploadPhoto`,
                 formData,
                 { withCredentials: true }
             );
             setRender(!render);
         } catch (error) {
             console.log("setting error: ", error);
-            setError("Error saving: " + error.response.data);
+            setError("Error saving: " + error.response);
         }
     };
 
