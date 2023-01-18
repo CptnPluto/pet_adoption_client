@@ -65,13 +65,15 @@ const PetsListProvider = ({ children }) => {
             }
         };
         fetchPetLists();
-    }, [user, isSaved]);
+    }, [user, isSaved, fetchMyPets, fetchSavedPets]);
 
     return (
         <PetsListContext.Provider
             value={{
                 myPets,
+                setMyPets,
                 savedPets,
+                setSavedPets,
                 setSavedPetIds,
                 savedPetIds,
                 fetchMyPets,
