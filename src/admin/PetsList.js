@@ -55,7 +55,10 @@ const PetsList = ({ render }) => {
                 <tbody>
                     {pets.length > 0 &&
                         pets.map((pet) => {
-                            return (
+                            {if (pet && pet.picture.startsWith("https://cataas.com//cat")) {
+                                pet.picture = pet.picture.replace("https://cataas.com//cat", "https://cataas.com/cat");
+                            }}
+                              return(  
                                 <tr className="entry" key={pet.petId}>
                                     <td>
                                         <img src={pet.picture} alt={pet.name} />
