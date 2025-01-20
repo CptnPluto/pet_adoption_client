@@ -16,33 +16,41 @@ const PetsListProvider = ({ children }) => {
 
     const fetchMyPets = useCallback(
         async (userId = user.id) => {
-            const response = await axios.get(
-                `${process.env.REACT_APP_SERVER_URL}/pets/myPets/${userId}`,
-                {
-                    withCredentials: true,
-                }
-            );
-            const data = await response.data;
-            return data;
-            // if (data.length > 0) {
-            //     setMyPets([...data]);
-            // }
+            try {
+
+                const response = await axios.get(
+                    `${process.env.REACT_APP_SERVER_URL}/pets/myPets/${userId}`,
+                    { withCredentials: true, }
+                );
+                return response.data;
+                // if (data.length > 0) {
+                //     setMyPets([...data]);
+                // }
+            } catch (error) {
+                console.log(error("Error in fetchMyPets: ", error));
+                return [];
+            }
         },
         [user]
     );
 
     const fetchSavedPets = useCallback(
         async (userId = user.id) => {
-            const response = await axios.get(
-                `${process.env.REACT_APP_SERVER_URL}/pets/mySavedPets/${userId}`,
-                { withCredentials: true }
-            );
-            const data = await response.data;
-            return data;
-            // if (data.length > 0) {
-            //     setSavedPetIds(data.map((pet) => pet.petId));
-            //     setSavedPets([...data]);
-            // }
+            try{
+                const response = await axios.get(
+                    `${process.env.REACT_APP_SERVER_URL}/pets/mySavedPets/${userId}`,
+                    { withCredentials: true }
+                );
+                const data = await response.data;
+                return data;
+                // if (data.length > 0) {
+                //     setSavedPetIds(data.map((pet) => pet.petId));
+                //     setSavedPets([...data]);
+                // }
+            } catch (error) {
+                console.log("Error in fetchSavedPets: ", error);
+                return [];
+            }
         },
         [user]
     );
