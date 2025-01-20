@@ -1,3 +1,6 @@
+// TD 2025: This whole context probably needs to be redone. I don't think the pets context is necessary - I can just call the API's on necessary page loads
+// Can use custom hooks, lift state up and pass down as props, or use Redux for global state management.
+
 import { createContext } from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -23,9 +26,7 @@ const PetsListProvider = ({ children }) => {
                     { withCredentials: true, }
                 );
                 return response.data;
-                // if (data.length > 0) {
-                //     setMyPets([...data]);
-                // }
+            
             } catch (error) {
                 console.log(error("Error in fetchMyPets: ", error));
                 return [];
@@ -41,12 +42,8 @@ const PetsListProvider = ({ children }) => {
                     `${process.env.REACT_APP_SERVER_URL}/pets/mySavedPets/${userId}`,
                     { withCredentials: true }
                 );
-                const data = await response.data;
-                return data;
-                // if (data.length > 0) {
-                //     setSavedPetIds(data.map((pet) => pet.petId));
-                //     setSavedPets([...data]);
-                // }
+                return response.data;
+            
             } catch (error) {
                 console.log("Error in fetchSavedPets: ", error);
                 return [];
@@ -62,18 +59,21 @@ const PetsListProvider = ({ children }) => {
                 fetchMyPets(),
                 fetchSavedPets(),
             ]);
+
             if (myPetsResponse.length > 0) {
                 console.log("Setting my pets: ", myPetsResponse);
                 setMyPets([...myPetsResponse]);
             }
+
             if (savedPetsResponse.length >= 0) {
                 console.log("Setting saved pets: ", savedPetsResponse);
                 setSavedPetIds(savedPetsResponse.map((pet) => pet.petId));
                 setSavedPets([...savedPetsResponse]);
             }
         };
+
         fetchPetLists();
-    }, [user, isSaved, fetchMyPets, fetchSavedPets]);
+    }, [isSaved, fetchMyPets, fetchSavedPets]);
 
     return (
         <PetsListContext.Provider
