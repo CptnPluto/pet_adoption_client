@@ -1,3 +1,7 @@
+# Note - Old repo
+
+This is one of the first projects I created, as part of a hackathon.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
